@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Text Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color:#3434cc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #7e2525;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px;
+        }
+        h1 {
+            color: #333333;
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 16px;
+            color: #555555;
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .output {
+            margin-top: 20px;
+            color: #333333;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>English to Finnish Translation</h1>
+        <form method="POST">
+            <label for="english_text">Enter English Text:</label>
+            <textarea id="texbox" name="text_input" rows="4" cols="50"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+        {% if entered_text %}
+            <div class="output">
+                Translated text: "{{ entered_text }}"
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
