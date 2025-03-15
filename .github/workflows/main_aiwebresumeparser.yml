@@ -23,6 +23,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+      
+      - name: Change to project directory
+        run: cd 'Gen AI Projects/ai_resume_parser'
 
       - name: Create and start virtual environment
         run: |
@@ -31,15 +34,16 @@ jobs:
       
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          if [ -f "Gen AI Projects/ai_resume_parser/requirements.txt" ]; then
-            pip install -r "Gen AI Projects/ai_resume_parser/requirements.txt"
-          fi
+          cd 'Gen AI Projects/ai_resume_parser'
+          pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: |
+          cd 'Gen AI Projects/ai_resume_parser'
+          zip -r ../../release.zip ./*
+          cd ../..
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
@@ -80,6 +84,5 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'aiwebresumeparser'
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: 'Gen AI Projects/ai_resume_parser'
           slot-name: 'Production'
+          package: '.'
