@@ -1,0 +1,5 @@
+streamlit
+crewai
+python-docx
+pymupdf
+crewai-tools
